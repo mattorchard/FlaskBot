@@ -1,0 +1,39 @@
+body {
+    background-color: #3d3d5d
+}
+.bg-inset {
+    background-color: #373754;
+}
+.bg-inset label {
+    color: white;
+}
+.col-xs-0 {
+    width: 0;
+}
+#videoStream {
+    max-width: 640px;
+    max-height: 480px;
+}
+.command-button {
+    font-size: 5em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    cursor: pointer;
+}
+.table td.command-button {
+    border-top: none;
+}
+.command-button:hover {
+    background-color: #4d4d6d;
+}
+.display-hover {
+    opacity: 0;
+}
+.display-hover:hover {
+    opacity: 1;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

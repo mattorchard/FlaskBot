@@ -1,0 +1,12 @@
+beautifulsoup4==4.6.0
+bs4==0.0.1
+clipboard==0.0.4
+olefile==0.44
+Pillow==4.2.1
+PyAutoGUI==0.9.36
+PyMsgBox==1.0.6
+pyperclip==1.5.27
+PyScreeze==0.1.13
+PyTweening==1.0.3
+requests==2.13.0
+urllib3==1.20

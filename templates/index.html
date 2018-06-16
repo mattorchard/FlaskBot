@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskBot</title>
+    {% include "imports_cdn.html" %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">FlaskBot</span>
+        <div id="modeSwitchContainer" class="btn-group">
+            <button class="btn btn-dark" data-mode="edit">
+                Edit&nbsp;&nbsp;
+                <span class="fas fa-wrench"></span>
+            </button>
+            <button class="btn btn-dark" data-mode="auto">
+                Auto&nbsp;&nbsp;
+                <span class="fas fa-play"></span>
+            </button>
+            <button class="btn btn-dark" data-mode="plan">
+                Plan&nbsp;&nbsp;
+                <span class="fas fa-stopwatch"></span>
+            </button>
+        </div>
+    </nav>
+    <div id="superContainer" class="mt-4 container-fluid">
+        <div class="row">
+            <div id="videoStreamContainer" class="col-lg-5 text-center">
+                <img id="videoStream" class="container" src="{{ url_for('static', filename='images/StreamOffline.png') }}">
+            </div>
+            <div class="col-lg-7 row">
+                <div id="commandButtonContainer" class="col-xl-6 col-lg-7">
+                    <table id="commandButtonTable" class="table text-center">
+                        <tr>
+                            <td class="command-button" data-command-key="arc_left">🢄</td>
+                            <td class="command-button" data-command-key="forward">🢁</td>
+                            <td class="command-button" data-command-key="arc_right">🢅</td>
+                        </tr>
+                        <tr>
+                            <td class="command-button" data-command-key="left">🢀</td>
+                            <td class="command-button" data-command-key="stop">■</td>
+                            <td class="command-button" data-command-key="right">🢂</td>
+                        </tr>
+                        <tr>
+                            <td class="command-button" data-command-key="back_arc-right">🢇</td>
+                            <td class="command-button" data-command-key="backwards">🢃</td>
+                            <td class="command-button" data-command-key="back-arc-left">🢆</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="editCardContainer" class="col-xl-6 col-lg-5">
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <h2>Forward</h2>
+                        </div>
+                        <div class="card-body">
+
+                            <p class="card-text">Foo Bar Baz</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <nav id="timelineContainer" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom" style="display:none;">
+            <div class="text-white">
+                Fooooo
+            </div>
+        </nav>
+
+        <script>
+            main();
+        </script>
+    </div>
+
+</body>
+</html>
