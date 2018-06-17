@@ -1,21 +1,22 @@
 let CURRENT_MODE;
 let SEND_COMMANDS_URL;
-
-const COMMAND_MAP = { //🢀🢂🢁🢃🢄🢅🢆🢇■
-    arc_left:       {icon: "🢄", text: "Arc Left", color: "", details: {speed_left: 50, speed_right: 200, duration: 1.5}},
-    forward:        {icon: "🢁", text: "Forward", color: "", details: {speed_left: 150, speed_right: 150, duration: 1}},
-    arc_right:      {icon: "🢅", text: "Arc Right", color: "", details: {speed_left: 50, speed_right: 200, duration: 1.5}},
-    left:           {icon: "🢀", text: "Left", color: "", details: {speed_left: -150, speed_right: 150, duration: 1}},
-    stop:           {icon: "■", text: "Stop", color: "", details: {speed_left: 0, speed_right: 0, duration: 2}},
-    right:          {icon: "🢂", text: "Right", color: "", details: {speed_left: 150, speed_right: -150, duration: 1}},
-    back_arc_left:  {icon: "🢆", text: "Back Arc Left", color: "", details: {speed_left: -50, speed_right: -200, duration: 1.5}},
-    backwards:      {icon: "🢃", text: "Backwards", color: "", details: {speed_left: 150, speed_right: 150, duration: 1}},
-    back_arc_right: {icon: "🢇", text: "Back Arc Right", color: "", details: {speed_left: -150, speed_right: -50, duration: 1.5}}
+//🢀🢂🢁🢃🢄🢅🢆🢇■
+const COMMAND_MAP = {
+    arc_left:       {icon: "🢄", text: "Arc Left", color: "pal-yellow", details: {speed_left: 50, speed_right: 200, duration: 1.5}},
+    forward:        {icon: "🢁", text: "Forward", color: "pal-green", details: {speed_left: 150, speed_right: 150, duration: 1}},
+    arc_right:      {icon: "🢅", text: "Arc Right", color: "pal-yellow", details: {speed_left: 50, speed_right: 200, duration: 1.5}},
+    left:           {icon: "🢀", text: "Left", color: "pal-green", details: {speed_left: -150, speed_right: 150, duration: 1}},
+    stop:           {icon: "■", text: "Stop", color: "pal-red", details: {speed_left: 0, speed_right: 0, duration: 2}},
+    right:          {icon: "🢂", text: "Right", color: "pal-green", details: {speed_left: 150, speed_right: -150, duration: 1}},
+    back_arc_left:  {icon: "🢆", text: "Back Arc Left", color: "pal-yellow", details: {speed_left: -50, speed_right: -200, duration: 1.5}},
+    backwards:      {icon: "🢃", text: "Backwards", color: "pal-green", details: {speed_left: 150, speed_right: 150, duration: 1}},
+    back_arc_right: {icon: "🢇", text: "Back Arc Right", color: "pal-yellow", details: {speed_left: -150, speed_right: -50, duration: 1.5}}
 };
 
 function main(){
     selectMode("edit");
-    initializeSliders();
+    initializeEditSliders();
+    initializeTimeline();
     $("#modeSwitchContainer button").click(event => {
             const $button = $(event.target).closest(".btn");
             selectMode($button.data("mode"));
@@ -29,7 +30,7 @@ function clickCommand(commandKey) {
     if (CURRENT_MODE === "edit") {
         openCommandEdit(commandKey);
     } else if (CURRENT_MODE === "auto") {
-        sendCommand(commandKey);
+        sendCommands([commandKey]);
     } else if (CURRENT_MODE === "plan") {
         addCommandToTimeline(commandKey);
     } else {
@@ -45,20 +46,19 @@ function openCommandEdit(commandKey) {
     setCommandDetailSliders(command.details);
 }
 
-function sendCommand(command) {
-    if (typeof command === "string") {
-        sendCommands([COMMAND_MAP[command]]);
-    } else if (typeof command === "object") {
-        sendCommands([command]);
-    }
-}
-
 function addCommandToTimeline(commandKey) {
-    alert("Not yet implemented");
+    const command = COMMAND_MAP[commandKey];
+    const $timelineCommand = $("<div></div>")
+        .addClass("timeline-command rounded d-inline-block")
+        .addClass(command.color)
+        .text(command.text + " " + command.icon)
+        .data("command", commandKey);
+    $timelineCommand.appendTo("#timeline");
 }
 
-function sendCommands(commandList) {
-    console.table(commandList);
+function sendCommands(commandKeyList) {
+    console.log(commandKeyList);
+    const commandList = commandKeyList.map(commandKey => COMMAND_MAP[commandKey]);
     $.ajax({
         method: "POST",
         url: SEND_COMMANDS_URL,
@@ -69,6 +69,11 @@ function sendCommands(commandList) {
     }).fail(error => {
         console.error(`Failed to send commands with error: ${error}`);
     })
+}
+
+function playTimeline() {
+    const commandKeyList = $("#timeline").children().toArray().map(child => $(child).data("command"));
+    sendCommands(commandKeyList);
 }
 
 function setCommandDetailSliders(command) {
@@ -104,7 +109,7 @@ function highlightModeButton(mode) {
 }
 
 
-function initializeSliders() {
+function initializeEditSliders() {
     $(".command-field-speed").slider({
         value: 0,
         min: -255,
@@ -125,6 +130,20 @@ function initializeSliders() {
         change: (event, ui) => sliderValueChanged($(event.target), $(ui.handle), ui.value)
     });
     openCommandEdit("stop");
+}
+
+function initializeTimeline() {
+    const $timeline = $("#timeline");
+    $timeline.click(event => {
+        if (event.target.classList.contains("timeline-command")) {
+            $(event.target).remove();
+        }
+    });
+    $timeline.sortable({axis: "x"});
+        $("#timelineContainer .fa-trash").click(() => {
+        $timeline.empty();
+    });
+    $("#timelineContainer .fa-play").click(playTimeline);
 }
 
 function sliderValueChanged($slider, $handle, value) {

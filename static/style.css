@@ -22,6 +22,21 @@ body {
     text-align: center;
     line-height: 1.6em;
 }
+.timeline-command {
+    padding: 0.5em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    cursor: move;
+}
+.pal-green {
+    background-color: #3EC300;
+}
+.pal-yellow {
+    background-color: #FFD82D;
+}
+.pal-red {
+    background-color: #D64933;
+}
 .fas {
     cursor: pointer;
 }
