@@ -10,18 +10,21 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1">FlaskBot</span>
+        <span class="navbar-brand mb-0 h1">Flask<span>Bot</span></span>
         <div id="modeSwitchContainer" class="btn-group">
             <button class="btn btn-dark" data-mode="edit">
-                Edit&nbsp;&nbsp;
+                Edit
+                &nbsp;&nbsp;
                 <span class="fas fa-wrench"></span>
             </button>
             <button class="btn btn-dark" data-mode="auto">
-                Auto&nbsp;&nbsp;
+                Auto
+                &nbsp;&nbsp;
                 <span class="fas fa-play"></span>
             </button>
             <button class="btn btn-dark" data-mode="plan">
-                Plan&nbsp;&nbsp;
+                Plan
+                &nbsp;&nbsp;
                 <span class="fas fa-stopwatch"></span>
             </button>
         </div>
@@ -54,7 +57,7 @@
                 <div id="editCardContainer" class="col-xl-6 col-lg-5">
                     <div class="card text-white bg-dark">
                         <div class="card-header">
-                            <h2>Forward</h2>
+                            <h2>Edit</h2>
                         </div>
                         <div class="card-body">
 
@@ -66,9 +69,29 @@
             </div>
         </div>
 
-        <nav id="timelineContainer" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom" style="display:none;">
-            <div class="text-white">
-                Fooooo
+        <nav id="timelineContainer" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom text-white" style="display:none;">
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h2>
+                            <span class="fas fa-stop"></span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="fas fa-play"></span>
+                        </h2>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <h2>
+                            <span class="fas fa-trash"></span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="timeline" class="scroll-menu">
+
+                    </div>
+                </div>
             </div>
         </nav>
 

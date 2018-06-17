@@ -1,18 +1,25 @@
 body {
     background-color: #3d3d5d
 }
+.navbar-brand span{
+    color: #ad3d3d;
+}
 .bg-inset {
     background-color: #373754;
 }
 .bg-inset label {
     color: white;
 }
-.col-xs-0 {
-    width: 0;
-}
 #videoStream {
     max-width: 640px;
     max-height: 480px;
+}
+.fas {
+    cursor: pointer;
+}
+.scroll-menu {
+    overflow: auto;
+    white-space: nowrap;
 }
 .command-button {
     font-size: 5em;
