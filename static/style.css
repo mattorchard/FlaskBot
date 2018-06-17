@@ -14,12 +14,24 @@ body {
     max-width: 640px;
     max-height: 480px;
 }
+.command-field .custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+}
 .fas {
     cursor: pointer;
 }
 .scroll-menu {
     overflow: auto;
     white-space: nowrap;
+}
+.list-group-item {
+    padding-bottom: 6px;
+    padding-top: 6px;
 }
 .command-button {
     font-size: 5em;

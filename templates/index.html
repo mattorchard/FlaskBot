@@ -48,20 +48,44 @@
                             <td class="command-button" data-command-key="right">🢂</td>
                         </tr>
                         <tr>
-                            <td class="command-button" data-command-key="back_arc-right">🢇</td>
+                            <td class="command-button" data-command-key="back_arc_right">🢇</td>
                             <td class="command-button" data-command-key="backwards">🢃</td>
-                            <td class="command-button" data-command-key="back-arc-left">🢆</td>
+                            <td class="command-button" data-command-key="back_arc_left">🢆</td>
                         </tr>
                     </table>
                 </div>
                 <div id="editCardContainer" class="col-xl-6 col-lg-5">
-                    <div class="card text-white bg-dark">
+                    <div id="editCard" class="card text-white bg-dark">
                         <div class="card-header">
                             <h2>Edit</h2>
                         </div>
                         <div class="card-body">
-
-                            <p class="card-text">Foo Bar Baz</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-dark">
+                                    <div class="card-text mb-2">
+                                        Speed Left:
+                                    </div>
+                                    <div id="speedLeft" class="command-field command-field-speed" data-detail-key="speed_left">
+                                        <div class="custom-handle ui-slider-handle"></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <div class="card-text mb-2">
+                                        Speed Right:
+                                    </div>
+                                    <div id="speedRight" class="command-field command-field-speed" data-detail-key="speed_right">
+                                        <div class="custom-handle ui-slider-handle"></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item bg-dark">
+                                    <div class="card-text mb-2">
+                                        Duration
+                                    </div>
+                                    <div id="duration" class="command-field command-field-duration" data-detail-key="duration">
+                                        <div class="custom-handle ui-slider-handle"></div>
+                                    </div>
+                                </li>
+                              </ul>
                         </div>
                     </div>
                 </div>
@@ -94,7 +118,6 @@
                 </div>
             </div>
         </nav>
-
         <script>
             main();
         </script>
