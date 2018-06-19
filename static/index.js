@@ -1,5 +1,5 @@
 let CURRENT_MODE;
-let SEND_COMMANDS_URL;
+let URLS = {};
 //🢀🢂🢁🢃🢄🢅🢆🢇■
 const COMMAND_MAP = {
     arc_left:       {icon: "🢄", text: "Arc Left", color: "pal-yellow", details: {speed_left: 50, speed_right: 200, duration: 1.5}},
@@ -17,6 +17,7 @@ function main(){
     selectMode("edit");
     initializeEditSliders();
     initializeTimeline();
+    initializeStreamToggle();
     $("#modeSwitchContainer button").click(event => {
             const $button = $(event.target).closest(".btn");
             selectMode($button.data("mode"));
@@ -61,7 +62,7 @@ function sendCommands(commandKeyList) {
     const commandList = commandKeyList.map(commandKey => COMMAND_MAP[commandKey]);
     $.ajax({
         method: "POST",
-        url: SEND_COMMANDS_URL,
+        url: URLS.commands,
         contentType: 'application/json',
         data: JSON.stringify({moves: commandList})
     }).done(() => {
@@ -144,6 +145,41 @@ function initializeTimeline() {
         $timeline.empty();
     });
     $("#timelineContainer .fa-play").click(playTimeline);
+}
+
+function initializeStreamToggle() {
+    $(".stream-toggle-button").click(event => {
+        const $button = $(event.target).closest(".btn");
+        const enabled = $button.data("enabled");
+        $.ajax({
+            method: "POST",
+            contentType: 'application/json',
+            url: URLS.stream.enabled,
+            data: JSON.stringify({enabled: enabled})
+        }).done(data => streamToggled(data.enabled));
+    });
+    $.ajax({
+        method: "GET",
+        url: URLS.stream.enabled
+    }).done(data => streamToggled(data.enabled));
+}
+
+function streamToggled(enabled) {
+    console.log(`Stream toggled, set to: ${enabled}`);
+    const $videoStream = $("#videoStream");
+    const $toggleButtons = $(".stream-toggle-button");
+    if (enabled) {
+        $videoStream.slideDown();
+    } else {
+        $videoStream.slideUp();
+    }
+    $toggleButtons.filter(`[data-enabled=${!enabled}]`).show();
+    $toggleButtons.filter(`[data-enabled=${enabled}]`).hide();
+    $videoStream.attr("src", $videoStream.attr("src") + "?enabled=" + enabled);
+}
+
+function setUrls(urls) {
+    URLS = urls;
 }
 
 function sliderValueChanged($slider, $handle, value) {

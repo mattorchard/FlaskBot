@@ -32,7 +32,21 @@
     <div id="superContainer" class="mt-4 container-fluid">
         <div class="row">
             <div id="videoStreamContainer" class="col-lg-5 text-center">
-                <img id="videoStream" class="container" src="{{ url_for('static', filename='images/StreamOffline.png') }}">
+                <div class="container">
+                    <div class="row bg-dark py-3 rounded">
+                        <img id="videoStream" class="container" style="display: none;" src="{{ url_for('video_feed') }}">
+                    </div>
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="stream-toggle-button btn btn-dark" data-enabled="true" style="display: none;">
+                                Start Stream <span class="fa fa-video"></span>
+                            </div>
+                            <div class="stream-toggle-button btn btn-dark" data-enabled="false" style="display: none;">
+                                Stop Stream <span class="fa fa-video-slash"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-7 row">
                 <div id="commandButtonContainer" class="col-xl-6 col-lg-7">
@@ -120,6 +134,12 @@
         </nav>
 
         <script>
+            setUrls({
+                commands: "",
+                stream: {
+                    enabled: "{{ url_for('video_enable') }}"
+                }
+            });
             main();
         </script>
     </div>
