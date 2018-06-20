@@ -1,3 +1,4 @@
+celery
 beautifulsoup4==4.6.0
 bs4==0.0.1
 clipboard==0.0.4

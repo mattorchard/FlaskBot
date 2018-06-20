@@ -135,7 +135,7 @@
 
         <script>
             setUrls({
-                commands: "",
+                commands: "{{ url_for('motor_move') }}",
                 stream: {
                     enabled: "{{ url_for('video_enable') }}"
                 }

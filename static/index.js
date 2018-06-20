@@ -2,15 +2,15 @@ let CURRENT_MODE;
 let URLS = {};
 //🢀🢂🢁🢃🢄🢅🢆🢇■
 const COMMAND_MAP = {
-    arc_left:       {icon: "🢄", text: "Arc Left", color: "pal-yellow", details: {speed_left: 50, speed_right: 200, duration: 1.5}},
-    forward:        {icon: "🢁", text: "Forward", color: "pal-green", details: {speed_left: 150, speed_right: 150, duration: 1}},
-    arc_right:      {icon: "🢅", text: "Arc Right", color: "pal-yellow", details: {speed_left: 50, speed_right: 200, duration: 1.5}},
-    left:           {icon: "🢀", text: "Left", color: "pal-green", details: {speed_left: -150, speed_right: 150, duration: 1}},
+    arc_left:       {icon: "🢄", text: "Arc Left", color: "pal-yellow", details: {speed_left: 50, speed_right: 200, duration: 0.5}},
+    forward:        {icon: "🢁", text: "Forward", color: "pal-green", details: {speed_left: 150, speed_right: 150, duration: 0.5}},
+    arc_right:      {icon: "🢅", text: "Arc Right", color: "pal-yellow", details: {speed_left: 50, speed_right: 200, duration: 0.5}},
+    left:           {icon: "🢀", text: "Left", color: "pal-green", details: {speed_left: -150, speed_right: 150, duration: 0.5}},
     stop:           {icon: "■", text: "Stop", color: "pal-red", details: {speed_left: 0, speed_right: 0, duration: 2}},
-    right:          {icon: "🢂", text: "Right", color: "pal-green", details: {speed_left: 150, speed_right: -150, duration: 1}},
-    back_arc_left:  {icon: "🢆", text: "Back Arc Left", color: "pal-yellow", details: {speed_left: -50, speed_right: -200, duration: 1.5}},
-    backwards:      {icon: "🢃", text: "Backwards", color: "pal-green", details: {speed_left: 150, speed_right: 150, duration: 1}},
-    back_arc_right: {icon: "🢇", text: "Back Arc Right", color: "pal-yellow", details: {speed_left: -150, speed_right: -50, duration: 1.5}}
+    right:          {icon: "🢂", text: "Right", color: "pal-green", details: {speed_left: 150, speed_right: -150, duration: 0.5}},
+    back_arc_left:  {icon: "🢆", text: "Back Arc Left", color: "pal-yellow", details: {speed_left: -50, speed_right: -200, duration: 0.5}},
+    backwards:      {icon: "🢃", text: "Backwards", color: "pal-green", details: {speed_left: -150, speed_right: -150, duration: 0.5}},
+    back_arc_right: {icon: "🢇", text: "Back Arc Right", color: "pal-yellow", details: {speed_left: -150, speed_right: -50, duration: 0.5}}
 };
 
 function main(){
@@ -59,7 +59,7 @@ function addCommandToTimeline(commandKey) {
 
 function sendCommands(commandKeyList) {
     console.log(commandKeyList);
-    const commandList = commandKeyList.map(commandKey => COMMAND_MAP[commandKey]);
+    const commandList = commandKeyList.map(commandKey => COMMAND_MAP[commandKey].details);
     $.ajax({
         method: "POST",
         url: URLS.commands,
